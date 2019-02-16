@@ -1,17 +1,18 @@
-package com.artisan.example.count;
+package com.artisan.example.atomic;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
 
 import com.artisan.anno.ThreadSafe;
 
 import lombok.extern.slf4j.Slf4j;
 
 /**
- *使用了Atomic包下的线程安全的更新count的值
+ *使用了Atomic包下的线程安全的AtomicLong更新count的值
  * 
  * 要求： 10000个请求，同一时间允许500个请求同时执行 即每次允许500个请求同时执行
  * 
@@ -22,15 +23,15 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @ThreadSafe
-public class CountCaculatorDemo2 {
+public class CountCaculatorAtomicLong {
 
 	// 请求总数
 	private static int clientTotal = 10000;
 	// 同一时间执行的请求数
 	private static int threadTotal = 500;
 	
-	// 计数标识  使用AtomicInteger
-	private static AtomicInteger count =new AtomicInteger(0);     
+	// 计数标识  使用AtomicLong
+	private static AtomicLong count =new AtomicLong(0);     
 
 	public static void main(String[] args) throws InterruptedException {
 		// 创建一个可缓存线程池，如果线程池长度超过实际需要，可灵活回收空闲线程，若无可回收的线程，则新建线程。
