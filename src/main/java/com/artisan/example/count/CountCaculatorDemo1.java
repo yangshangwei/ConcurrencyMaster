@@ -1,4 +1,4 @@
-package com.artisan;
+package com.artisan.example.count;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
@@ -21,7 +21,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @NotThreadSafe
-public class CountCaculatorDemo {
+public class CountCaculatorDemo1 {
 
 	// 请求总数
 	private static int clientTotal = 10000;

@@ -1,16 +1,17 @@
-package com.artisan;
+package com.artisan.example.count;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
+import java.util.concurrent.atomic.AtomicInteger;
 
-import com.artisan.anno.NotThreadSafe;
+import com.artisan.anno.ThreadSafe;
 
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * 首先说明如下代码是存在并发问题的，这里是为了抛出问题，后续给出解决办法
+ *使用了Atomic包下的线程安全的更新count的值
  * 
  * 要求： 10000个请求，同一时间允许500个请求同时执行 即每次允许500个请求同时执行
  * 
@@ -20,16 +21,16 @@ import lombok.extern.slf4j.Slf4j;
  *
  */
 @Slf4j
-@NotThreadSafe
-public class CountCaculatorDemo {
+@ThreadSafe
+public class CountCaculatorDemo2 {
 
 	// 请求总数
 	private static int clientTotal = 10000;
 	// 同一时间执行的请求数
 	private static int threadTotal = 500;
 	
-	// 计数标识
-	private static int count = 0;
+	// 计数标识  使用AtomicInteger
+	private static AtomicInteger count =new AtomicInteger(0);     
 
 	public static void main(String[] args) throws InterruptedException {
 		// 创建一个可缓存线程池，如果线程池长度超过实际需要，可灵活回收空闲线程，若无可回收的线程，则新建线程。
@@ -68,11 +69,11 @@ public class CountCaculatorDemo {
 		// 关闭线程池
 		executorService.shutdown();
 		// 打印总数
-		log.info("执行总数：{}", count);
+		log.info("执行总数：{}", count.get());
 	}
 	
 	private static void add() {
-		count++;
+		count.incrementAndGet();
 	}
 
 }
