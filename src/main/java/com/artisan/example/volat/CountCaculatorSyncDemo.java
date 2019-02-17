@@ -77,6 +77,10 @@ public class CountCaculatorSyncDemo {
 	
 	private synchronized void add() {
 		// volatile 修饰了count ,仅能保证主内存中的数据是最新的，但count++操作不是原子操作，原子性不能保证，所以volatile不适合计数的场景
+		// 1、count 从主存中取出count的值
+        // 2、+1  在工作内存中执行+1操作
+        // 3、count 将count的值写回主存
+        //即使将count用volatile修饰，每次从主存中取到的都是最新的值，可是当多个线程同时取到最新的值，执行+1操作，当刷新到主存中的时候会覆盖结果，从而丢失一些+1操作
 		count++;
 	}
 
