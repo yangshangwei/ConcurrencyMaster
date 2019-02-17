@@ -10,7 +10,6 @@ public class SynchronizedStaticMethodDemo {
 
 	// 修饰静态方法
 	public synchronized static void test() {
-		// 修饰代码块 ，
 		for (int i = 0; i < 10; i++) {
 			log.info("调用 修饰方法 i = {} ", i);
 		}
