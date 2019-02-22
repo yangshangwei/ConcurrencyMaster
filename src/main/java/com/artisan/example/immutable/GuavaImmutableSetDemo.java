@@ -16,12 +16,12 @@ public class GuavaImmutableSetDemo {
 	// 不可变的set
 	private final static ImmutableSet<Integer> set = ImmutableSet.copyOf(list);
 	// 不可变的map，需要以k/v的形式传入数据，即奇数位参数为key，偶数位参数为value
-	private final static ImmutableMap<Integer, Integer> map = ImmutableMap.of(1, 2, 3, 4);
+	private final static ImmutableMap<String, String> map = ImmutableMap.of("k1", "v1", "k2","v2");
 	// 通过builder调用链的方式构造不可变的map
-	private final static ImmutableMap<Integer, Integer> map2 = ImmutableMap.<Integer, Integer>builder()
-																			.put(1, 2)
-																			.put(3, 4)
-																			.put(5, 6)
+	private final static ImmutableMap<String, String> map2 = ImmutableMap.<String, String>builder()
+																			.put("key1", "value1")
+																			.put("key2", "value2")
+																			.put("key3", "value3")
 																			.build();
 
 	public static void main(String[] args) {
@@ -35,9 +35,9 @@ public class GuavaImmutableSetDemo {
 		set.add(4);
 
 		// 不能添加新的元素 ，运行将抛出 java.lang.UnsupportedOperationException
-		map.put(5, 6);
+		map.put("k3", "v3");
 
 		// 不能添加新的元素 ，运行将抛出 java.lang.UnsupportedOperationException
-		map2.put(1, 3);
+		map2.put("key4", "value4");
 	}
 }
