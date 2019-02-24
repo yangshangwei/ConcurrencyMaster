@@ -30,7 +30,7 @@ public class VectorExample3 {
 		while (iterator.hasNext()) {
 			Integer i = iterator.next();
 			if (i.equals(3)) {
-				v1.remove(i);
+				iterator.remove();
 			}
 		}
 	}
