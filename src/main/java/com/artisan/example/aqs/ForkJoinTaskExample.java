@@ -9,7 +9,10 @@ import java.util.concurrent.RecursiveTask;
 @Slf4j
 public class ForkJoinTaskExample extends RecursiveTask<Integer> {
 
-    public static final int threshold = 2;
+	private static final long serialVersionUID = 5547724989189856681L;
+	
+	// 阈值
+	public static final int threshold = 2;
     private int start;
     private int end;
 
@@ -52,7 +55,7 @@ public class ForkJoinTaskExample extends RecursiveTask<Integer> {
         ForkJoinPool forkjoinPool = new ForkJoinPool();
 
         //生成一个计算任务，计算1+2+3+4
-        ForkJoinTaskExample task = new ForkJoinTaskExample(1, 100);
+        ForkJoinTaskExample task = new ForkJoinTaskExample(1, 4);
 
         //执行一个任务
         Future<Integer> result = forkjoinPool.submit(task);
